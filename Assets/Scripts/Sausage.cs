@@ -6,6 +6,7 @@ public class Sausage : MonoBehaviour
 {
     public Rigidbody rigidbody;
     public Collider collider;
+    public bool onTheGround;
 
     public Vector3 pos { get { return transform.position; }}
 
@@ -30,5 +31,13 @@ public class Sausage : MonoBehaviour
         rigidbody.velocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
         rigidbody.isKinematic = false;
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.CompareTag("Ground"))
+        {
+
+        }
     }
 }

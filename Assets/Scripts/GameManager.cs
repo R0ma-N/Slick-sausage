@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //cam = Camera.main;
         sausage.DisactivateRb();
     }
 
@@ -81,5 +80,6 @@ public class GameManager : MonoBehaviour
         sausage.Push(force);
 
         trajectory.Hide();
+        print(force);
     }
 }
