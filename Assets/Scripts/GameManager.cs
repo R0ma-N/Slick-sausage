@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,12 +23,15 @@ public class GameManager : MonoBehaviour
 
     public Sausage sausage;
     public Trajectory trajectory;
+
     [SerializeField] float pushForce = 4f;
 
     bool isDragging = false;
 
     Vector2 startPoint, endPoint, direction, force;
     float distance;
+
+    [SerializeField] GameObject failPanel;
 
     private void Start()
     {
@@ -81,5 +85,15 @@ public class GameManager : MonoBehaviour
 
         trajectory.Hide();
         print(force);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
