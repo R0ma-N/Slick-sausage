@@ -40,21 +40,31 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown (0))
-        {
-            isDragging = true;
-            OnDragStart();
-        }
+        sausage.ChekTheGround();
 
-        if (Input.GetMouseButtonUp (0))
+        if (sausage.onTheGround)
         {
-            isDragging = false;
-            OnDragEnd();
+            if (Input.GetMouseButtonDown(0))
+            {
+                isDragging = true;
+                OnDragStart();
+            }
+            
+            if (Input.GetMouseButtonUp (0))
+            {
+                isDragging = false;
+                OnDragEnd();
+            }
         }
 
         if (isDragging)
         {
             OnDrag();
+        }
+
+        if (sausage.isFailed)
+        {
+            Failed();
         }
     }
 
@@ -84,7 +94,11 @@ public class GameManager : MonoBehaviour
         sausage.Push(force);
 
         trajectory.Hide();
-        print(force);
+    }
+
+    private void Failed()
+    {
+        Time.timeScale = 0;
     }
 
     public void RestartGame()

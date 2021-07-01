@@ -5,15 +5,16 @@ using UnityEngine;
 public class Sausage : MonoBehaviour
 {
     public Rigidbody rigidbody;
-    public Collider collider;
     public bool onTheGround;
+    public bool isFailed;
+
+    [SerializeField] DetectingCollision[] collisions;
 
     public Vector3 pos { get { return transform.position; }}
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
-        collider = GetComponent<Collider>();
     }
 
     public void Push(Vector2 force)
@@ -33,11 +34,17 @@ public class Sausage : MonoBehaviour
         rigidbody.isKinematic = false;
     }
 
-    private void OnCollisionStay(Collision collision)
+    public void ChekTheGround()
     {
-        if (collision.collider.CompareTag("Ground"))
+        for (int i = 0; i < collisions.Length; i++)
         {
-
+            if (collisions[i].collisionDetected)
+            {
+                onTheGround = true;
+                return;
+            } 
+            
+            else onTheGround = false;
         }
     }
 }
