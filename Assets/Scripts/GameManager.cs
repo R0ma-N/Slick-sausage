@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         sausage.DisactivateRb();
     }
 
@@ -55,12 +56,13 @@ public class GameManager : MonoBehaviour
                 isDragging = false;
                 OnDragEnd();
             }
+            
+            if (isDragging)
+            {
+                OnDrag();
+            }
         }
 
-        if (isDragging)
-        {
-            OnDrag();
-        }
 
         if (sausage.isFailed)
         {
@@ -99,11 +101,12 @@ public class GameManager : MonoBehaviour
     private void Failed()
     {
         Time.timeScale = 0;
+        failPanel.SetActive(true);
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void Quit()
